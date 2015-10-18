@@ -10,8 +10,8 @@ default: &default
 
 development:
   <<: *default
-  database: uhura
+  database: analytics
 
 test:
   <<: *default
-  database: uhura_test
+  database: analytics_test
