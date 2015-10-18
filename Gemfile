@@ -20,4 +20,6 @@ gem 'ahoy_matey'
 gem 'ahoy_email'
 gem 'blazer'
 
+gem 'rails_12factor', group: :production
+
 
