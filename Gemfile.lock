@@ -37,6 +37,10 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.3.8)
+    ahoy_email (0.2.4)
+      addressable
+      nokogiri
+      rails
     ahoy_matey (1.2.0)
       addressable
       browser (>= 0.4.0)
@@ -159,6 +163,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ahoy_email
   ahoy_matey
   byebug
   coffee-rails (~> 4.1.0)
