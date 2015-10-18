@@ -1,0 +1,14 @@
+data_sources:
+  main:
+    url: <%= ENV["BLAZER_DATABASE_URL"] %>
+
+    smart_variables:
+
+    linked_columns:
+
+    smart_columns:
+
+audit: true
+
+time_zone: "Pacific Time (US & Canada)"
+
