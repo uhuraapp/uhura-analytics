@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151018020640) do
+ActiveRecord::Schema.define(version: 20151018131159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -235,7 +235,7 @@ ActiveRecord::Schema.define(version: 20151018020640) do
 
   create_table "users", id: :bigserial, force: :cascade do |t|
     t.string   "name",                               limit: 255
-    t.string   "email",                              limit: 255, null: false
+    t.string   "email",                              limit: 255,              null: false
     t.string   "password",                           limit: 100
     t.string   "locale",                             limit: 255
     t.datetime "created_at"
@@ -247,6 +247,12 @@ ActiveRecord::Schema.define(version: 20151018020640) do
     t.boolean  "welcome_mail"
     t.datetime "agree_with_the_terms_and_policy_at"
     t.string   "agree_with_the_terms_and_policy_in", limit: 255
+    t.string   "encrypted_password",                             default: "", null: false
+    t.integer  "sign_in_count",                                  default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
   end
 
   add_index "users", ["api_token"], name: "idx_user_by_token", using: :btree
@@ -254,6 +260,7 @@ ActiveRecord::Schema.define(version: 20151018020640) do
   add_index "users", ["api_token"], name: "users_api_token_key", unique: true, using: :btree
   add_index "users", ["email"], name: "idx_user_by_email", using: :btree
   add_index "users", ["email"], name: "idx_user_email", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["email"], name: "users_email_key", unique: true, using: :btree
   add_index "users", ["remember_token"], name: "users_remember_token_key", unique: true, using: :btree
 

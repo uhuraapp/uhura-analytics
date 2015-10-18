@@ -1,13 +1,17 @@
 default: &default
   adapter: postgresql
+  host: localhost
+  port: 5432
+  user: postgres
+  password:
   encoding: unicode
   pool: 5
   timeout: 5000
 
 development:
   <<: *default
-  database: analytics
+  database: uhura
 
 test:
   <<: *default
-  database: analytics_test
+  database: uhura_test
