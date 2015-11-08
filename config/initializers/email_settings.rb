@@ -1,3 +1,5 @@
+Rails.application.config.active_job.queue_adapter = :inline
+
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
   address: ENV['SMTP_ADDRESS'],
@@ -10,3 +12,4 @@ ActionMailer::Base.smtp_settings = {
   tls: true,
   enable_starttls_auto: true
 }
+
