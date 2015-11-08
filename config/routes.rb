@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :letters
   devise_for :users
 
   authenticate :user, lambda { |user| user } do
