@@ -10,6 +10,8 @@ data_sources:
     smart_columns:
 
     cache: 120
+  blazer:
+    url: <%= ENV["DATABASE_URL"] %>
 
 audit: true
 
