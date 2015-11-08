@@ -10,10 +10,3 @@ ActionMailer::Base.smtp_settings = {
   tls: true,
   enable_starttls_auto: true
 }
-
-settings = ActionMailer::Base.smtp_settings
-smtp = Net::SMTP.new settings[:address], settings[:port]
-smtp.enable_starttls_auto if settings[:enable_starttls_auto]
-smtp.start(settings[:domain]) do
-  smtp.authenticate settings[:user_name], settings[:password], settings[:authentication]
-end
