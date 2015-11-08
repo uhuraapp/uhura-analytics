@@ -9,7 +9,9 @@ data_sources:
 
     smart_columns:
 
+    cache: 120
+
 audit: true
 
-time_zone: "Pacific Time (US & Canada)"
+time_zone: "Brasilia"
 
