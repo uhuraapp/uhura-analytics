@@ -1,8 +1,12 @@
+ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
   address: ENV['SMTP_ADDRESS'],
   port: ENV['SMTP_PORT'],
-  domain: "uhura.io",
-  user_name: "support@uhura.io",
+  domain: ENV['SMTP_DOMAIN'],
+  user_name: ENV['SMTP_USERNAME'],
   password: ENV['SMTP_PASSWORD'],
-  authentication: "plain"
+  authentication: :login,
+  ssl: true,
+  tls: true,
+  enable_starttls_auto: true
 }
