@@ -17,7 +17,8 @@
   </div>
   <div class="field">
     <%= f.label :body %><br>
-    <%= f.text_area :body %>
+    <%= f.hidden_field :body %>
+    <trix-editor input='letter_body'></trix-editor>
   </div>
   <div class="field">
     <%= f.label :done %><br>

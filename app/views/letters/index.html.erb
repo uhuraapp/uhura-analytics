@@ -6,7 +6,6 @@
   <thead>
     <tr>
       <th>Subject</th>
-      <th>Body</th>
       <th>Done</th>
       <th colspan="3"></th>
     </tr>
@@ -16,7 +15,6 @@
     <% @letters.each do |letter| %>
       <tr>
         <td><%= letter.subject %></td>
-        <td><%= letter.body %></td>
         <td><%= letter.done %></td>
         <td><%= link_to 'Show', letter %></td>
         <td><%= link_to 'Edit', edit_letter_path(letter) %></td>
