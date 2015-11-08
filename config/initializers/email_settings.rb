@@ -4,6 +4,5 @@ ActionMailer::Base.smtp_settings = {
   domain: "uhura.io",
   user_name: "support@uhura.io",
   password: ENV['SMTP_PASSWORD'],
-  authentication: "plain",
-  enable_starttls_auto: true
+  authentication: "plain"
 }
