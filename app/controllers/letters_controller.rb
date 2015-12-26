@@ -1,5 +1,5 @@
 class LettersController < ApplicationController
-  before_action :set_letter, only: [:show, :edit, :update, :destroy]
+  before_action :set_letter, only: [:show, :edit, :update, :destroy, :deliver]
 
   def index
     @letters = Letter.all
@@ -13,6 +13,11 @@ class LettersController < ApplicationController
   end
 
   def edit
+  end
+
+  def deliver
+    LetterMailer.prepare(@letter.id, params[:email]).deliver_now
+    render text: "OK"
   end
 
   def create

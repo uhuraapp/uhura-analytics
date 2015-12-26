@@ -15,5 +15,11 @@
   <%= @letter.done %>
 </p>
 
+<%= form_for :letter, url: deliver_letter_path do |f| %>
+  <%= f.text_field :email %>
+  <%= f.submit "Send" %>
+<% end %>
+
+
 <%= link_to 'Edit', edit_letter_path(@letter) %> |
 <%= link_to 'Back', letters_path %>

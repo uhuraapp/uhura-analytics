@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :letters
+  resources :letters do
+    member do
+      post :deliver
+    end
+  end
+
   devise_for :users
 
   authenticate :user, lambda { |user| user } do
