@@ -1,16 +1,21 @@
+require 'cgi'
+
 class LetterMailer < ApplicationMailer
-  default from: 'duke@uhura.io'
+  attr_reader :letter, :user
 
-  attr_reader :letter, :email, :user
-
-  def send_letter(id, email)
+  def prepare(id, email)
     @letter = Letter.find id
     @user = User.where(email: email).first
+    body = h @letter.body
 
-    body = ERB.new(letter.body).result binding
-
-    mail to: email, subject: letter.subject do |format|
+    mail to: email, subject: h(letter.subject) do |format|
       format.html { render inline: body }
     end
+  end
+
+  protected
+
+  def h(data)
+    ERB.new(CGI.unescapeHTML(data)).result binding
   end
 end
