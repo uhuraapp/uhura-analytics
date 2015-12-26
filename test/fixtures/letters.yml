@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  subject: MyString
-  body: MyText
-  done: false
+  subject: Hello
+  body: "Hello <%%= email %>, are you user #<%%= user.id %>? Welcome from <%%= letter.subject %> letter"
+  done: true
 
 two:
   subject: MyString
   body: MyText
-  done: true
+  done: false
