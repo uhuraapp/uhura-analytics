@@ -1,7 +1,10 @@
 require 'test_helper'
 
 class LettersControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
+    sign_in users(:one)
     @letter = letters(:one)
   end
 
@@ -25,17 +28,17 @@ class LettersControllerTest < ActionController::TestCase
   end
 
   test "should show letter" do
-    get :show, id: @letter
+    get :show, id: @letter.id
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @letter
+    get :edit, id: @letter.id
     assert_response :success
   end
 
   test "should update letter" do
-    patch :update, id: @letter, letter: { body: @letter.body, done: @letter.done, subject: @letter.subject }
+    patch :update, id: @letter.id, letter: { body: @letter.body, done: @letter.done, subject: @letter.subject }
     assert_redirected_to letter_path(assigns(:letter))
   end
 
