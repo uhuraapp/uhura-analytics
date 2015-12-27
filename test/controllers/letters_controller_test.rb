@@ -53,7 +53,7 @@ class LettersControllerTest < ActionController::TestCase
   test "should deliver letter" do
     user = users(1)
     assert_difference 'ActionMailer::Base.deliveries.size', +1 do
-      post :deliver, id: @letter.id, email: user.email
+      post :deliver, id: @letter.id, letter: { email: user.email }
     end
 
     letter_email = ActionMailer::Base.deliveries.last

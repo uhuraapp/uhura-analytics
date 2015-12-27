@@ -16,7 +16,7 @@ class LettersController < ApplicationController
   end
 
   def deliver
-    LetterMailer.prepare(@letter.id, params[:email]).deliver_now
+    LetterMailer.prepare(@letter.id, params[:letter][:email]).deliver_now
     render text: "OK"
   end
 
