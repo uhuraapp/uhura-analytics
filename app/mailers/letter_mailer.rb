@@ -7,7 +7,10 @@ class LetterMailer < ApplicationMailer
     @letter = Letter.find id
     @user = User.where(email: email).first
 
-    throw "Not Found user email #{email}" if @user.email != email
+    if @user.email != email
+      puts "Not Found user email #{email}"
+      return
+    end
 
     body = h @letter.body
     subject = h @letter.subject
