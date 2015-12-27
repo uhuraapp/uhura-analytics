@@ -7,8 +7,9 @@ class LetterMailer < ApplicationMailer
     @letter = Letter.find id
     @user = User.where(email: email).first
     body = h @letter.body
+    subject = h @letter.subject
 
-    mail to: email, subject: h(letter.subject) do |format|
+    mail to: email, subject: subject do |format|
       format.html { render inline: body }
     end
   end

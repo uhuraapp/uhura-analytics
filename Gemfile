@@ -27,4 +27,4 @@ gem 'blazer'
 
 gem 'rails_12factor', group: :production
 
-
+gem 'activeresource'

@@ -4,7 +4,7 @@ class LettersControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   setup do
-    sign_in users(:one)
+    sign_in admins(:one)
     @letter = letters(:one)
   end
 
@@ -51,7 +51,7 @@ class LettersControllerTest < ActionController::TestCase
   end
 
   test "should deliver letter" do
-    user = users(:one)
+    user = users(1)
     assert_difference 'ActionMailer::Base.deliveries.size', +1 do
       post :deliver, id: @letter.id, email: user.email
     end
@@ -59,7 +59,7 @@ class LettersControllerTest < ActionController::TestCase
     letter_email = ActionMailer::Base.deliveries.last
 
     assert_equal "Hello #{user.email}", letter_email.subject
-    assert_equal 'duke@duke.com', letter_email.to[0]
+    assert_equal user.email, letter_email.to[0]
     assert_match /Hello #{user.email}, are you user/, letter_email.body.to_s
   end
 end

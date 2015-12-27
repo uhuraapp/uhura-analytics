@@ -5,9 +5,9 @@ Rails.application.routes.draw do
     end
   end
 
-  devise_for :users
+  devise_for :admins
 
-  authenticate :user, lambda { |user| user } do
+  authenticate :admin, lambda { |user| user } do
     mount Blazer::Engine, at: "/"
   end
 end
