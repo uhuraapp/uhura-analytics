@@ -15,7 +15,8 @@ data_sources:
 
 audit: true
 
+user_class: Admin
+
 time_zone: "Brasilia"
 
 from_email: blazer@uhura.io
-
