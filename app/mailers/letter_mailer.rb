@@ -6,6 +6,9 @@ class LetterMailer < ApplicationMailer
   def prepare(id, email)
     @letter = Letter.find id
     @user = User.where(email: email).first
+
+    throw "Not Found user email #{email}" if @user.email != email
+
     body = h @letter.body
     subject = h @letter.subject
 
