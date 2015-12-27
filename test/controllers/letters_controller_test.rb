@@ -50,7 +50,7 @@ class LettersControllerTest < ActionController::TestCase
     assert_redirected_to letters_path
   end
 
-  test "should deliver letter" do
+  test "should deliver letter to a user" do
     user = users(1)
     assert_difference 'ActionMailer::Base.deliveries.size', +1 do
       post :deliver, id: @letter.id, letter: { email: user.email }
@@ -61,5 +61,17 @@ class LettersControllerTest < ActionController::TestCase
     assert_equal "Hello #{user.email}", letter_email.subject
     assert_equal user.email, letter_email.to[0]
     assert_match /Hello #{user.email}, are you user/, letter_email.body.to_s
+  end
+
+  test "should deliver letter to all users" do
+    all_users = users()
+    assert_difference 'ActionMailer::Base.deliveries.size', all_users.size do
+      post :deliver, id: @letter.id, all: true
+    end
+
+    letter_email = ActionMailer::Base.deliveries.last
+
+    assert_match /Hello /, letter_email.subject
+    assert_match /Hello .+, are you user/, letter_email.body.to_s
   end
 end

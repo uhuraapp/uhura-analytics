@@ -15,9 +15,12 @@
   <%= @letter.done %>
 </p>
 
-<%= form_for :letter, url: deliver_letter_path do |f| %>
-  <%= f.text_field :email %>
-  <%= f.submit "Send" %>
+<% if @letter.done %>
+  <%= form_for :letter, url: deliver_letter_path do |f| %>
+    <%= f.text_field :email %>
+    All <%= check_box_tag :all %>
+    <%= f.submit "Send" %>
+  <% end %>
 <% end %>
 
 

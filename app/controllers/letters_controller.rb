@@ -18,7 +18,11 @@ class LettersController < ApplicationController
   end
 
   def deliver
-    LetterMailer.prepare(@letter.id, params[:letter][:email]).deliver_now
+    users = params[:all] ? User.all : User.where(email: params[:letter][:email])
+
+    users.each do |user|
+        LetterMailer.prepare(@letter.id, user.email).deliver_later
+    end
     render text: "OK"
   end
 
