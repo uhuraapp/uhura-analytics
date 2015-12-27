@@ -66,7 +66,7 @@ class LettersControllerTest < ActionController::TestCase
   test "should deliver letter to all users" do
     all_users = users()
     assert_difference 'ActionMailer::Base.deliveries.size', all_users.size do
-      post :deliver, id: @letter.id, all: true
+      post :deliver, id: @letter.id, all: true, letter: { unique_send: "false" }
     end
 
     letter_email = ActionMailer::Base.deliveries.last
@@ -83,7 +83,7 @@ class LettersControllerTest < ActionController::TestCase
     end
 
     assert_difference 'ActionMailer::Base.deliveries.size', (all_users.size) - received.size do
-      post :deliver, id: @letter.id, all: true, letter: { unique_send: true }
+      post :deliver, id: @letter.id, all: true, letter: { unique_send: "1" }
     end
   end
 end

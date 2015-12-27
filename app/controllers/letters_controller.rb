@@ -20,8 +20,10 @@ class LettersController < ApplicationController
   def deliver
     users = params[:all] ? User.all : User.where(email: params[:letter][:email])
 
+    unique = letter_params[:unique_send].to_bool
+
     users.each do |user|
-      unless Ahoy::Message.exists?(user_id: user.id, letter_id: @letter.id) and params[:letter][:unique_send]
+      unless unique && Ahoy::Message.exists?(user_id: user.id, letter_id: @letter.id)
         LetterMailer.prepare(@letter.id, user.email).deliver_later
       end
     end
@@ -63,6 +65,6 @@ class LettersController < ApplicationController
     end
 
     def letter_params
-      params.require(:letter).permit(:subject, :body, :done)
+      params.require(:letter).permit(:subject, :body, :done, :unique_send)
     end
 end
