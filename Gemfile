@@ -20,6 +20,7 @@ group :development, :test do
   gem 'spring'
   gem 'pry-meta'
   gem 'letter_opener'
+  gem "parity"
 end
 
 gem 'ahoy_matey'

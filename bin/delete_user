@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require 'parity'
+
+def delete_user(ids)
+  ids.map do |id|
+    [
+      "DELETE FROM users WHERE id=#{id}",
+      "DELETE FROM user_channels WHERE user_id=#{id}",
+      "DELETE FROM user_items WHERE user_id=#{id}",
+      "DELETE FROM profiles WHERE user_id=#{id}"
+    ]
+  end.flatten
+end
+
+query = delete_user(ARGV[0].split(","))
+
+print query.join("\n") + "\nRun? "
+accept = STDIN.gets.chomp
+
+if accept == "y"
+  Parity::Environment.new(
+    "production",
+    ["pg:psql", "-c", query.join(";")],
+  ).run
+end
