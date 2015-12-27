@@ -27,14 +27,17 @@ def User.timestamp
   1
 end
 
+def users(id = nil)
+  id ? User.find(id) : User.all
+end
+
 ActiveResource::HttpMock.respond_to do |mock|
   headers = {"Accept"=>"application/json", "Auth-Token"=>"6512bd43d9caa6e02c990b0a82652dca", "Auth-Timestamp"=>"1"}
 
-  mock.get "/v3/users/1.json", headers, one(:users, :default)
-  mock.get "/v3/users.json", headers, many(:users, [:default, :foo, :bar, :other])
-  mock.get "/v3/users.json?email=person%40default.com", headers, many(:users, [:default])
-end
+  mock.get "/v3/users.json", headers, many(:users, [1,2,3,4])
 
-def users(id)
-  id ? User.find(id) : User.all
+  users.each do |user|
+    mock.get "/v3/users/#{user.id}.json", headers, one(:users, user.id)
+    mock.get "/v3/users.json?email=#{CGI::escape(user.email)}", headers, many(:users, [user.id])
+  end
 end
