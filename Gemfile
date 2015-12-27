@@ -19,6 +19,7 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'pry-meta'
+  gem 'letter_opener'
 end
 
 gem 'ahoy_matey'
