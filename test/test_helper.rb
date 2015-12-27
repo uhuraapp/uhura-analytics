@@ -25,9 +25,16 @@ def read_fixture(file)
   File.read(File.join(Rails.root, "test", "fixtures",  "#{file}.json"))
 end
 
+def User.timestamp
+  1
+end
+
 ActiveResource::HttpMock.respond_to do |mock|
-   mock.get "/users/1.json", {}, one(:users, :default)
-   mock.get "/users.json?email=person%40default.com", {}, many(:users, :default)
+  headers = {"Accept"=>"application/json", "Auth-Token"=>"6512bd43d9caa6e02c990b0a82652dca", "Auth-Timestamp"=>"1"}
+
+  mock.get "/v3/users/1.json", headers, one(:users, :default)
+  mock.get "/v3/users.json", headers, many(:users, :default)
+  mock.get "/v3/users.json?email=person%40default.com", headers, many(:users, :default)
 end
 
 def users(id)
