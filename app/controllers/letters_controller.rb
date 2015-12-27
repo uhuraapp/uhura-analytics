@@ -65,6 +65,6 @@ class LettersController < ApplicationController
     end
 
     def letter_params
-      params.require(:letter).permit(:subject, :body, :done, :unique_send)
+      params.require(:letter).permit(:subject, :body, :done, :unique_send, :uid)
     end
 end
