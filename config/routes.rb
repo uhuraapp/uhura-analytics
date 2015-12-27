@@ -10,6 +10,6 @@ Rails.application.routes.draw do
   devise_for :admins
 
   authenticate :admin, lambda { |user| user } do
-    mount Blazer::Engine, at: "/"
-  end
+     mount Blazer::Engine, at: "/admin"
+   end
 end
