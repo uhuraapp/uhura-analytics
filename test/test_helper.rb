@@ -15,10 +15,8 @@ def one(resource, id)
   data.to_json
 end
 
-def many(resource, id)
-  data = []
-  data.push JSON.parse read_fixture("#{resource}/#{id}")
-  data.to_json
+def many(resource, ids)
+  ids.map { |id| JSON.parse read_fixture("#{resource}/#{id}") }.to_json
 end
 
 def read_fixture(file)
@@ -33,10 +31,10 @@ ActiveResource::HttpMock.respond_to do |mock|
   headers = {"Accept"=>"application/json", "Auth-Token"=>"6512bd43d9caa6e02c990b0a82652dca", "Auth-Timestamp"=>"1"}
 
   mock.get "/v3/users/1.json", headers, one(:users, :default)
-  mock.get "/v3/users.json", headers, many(:users, :default)
-  mock.get "/v3/users.json?email=person%40default.com", headers, many(:users, :default)
+  mock.get "/v3/users.json", headers, many(:users, [:default, :foo, :bar, :other])
+  mock.get "/v3/users.json?email=person%40default.com", headers, many(:users, [:default])
 end
 
 def users(id)
-  User.find id
+  id ? User.find(id) : User.all
 end

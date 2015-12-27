@@ -9,6 +9,8 @@ class LetterMailer < ApplicationMailer
     body = h @letter.body
     subject = h @letter.subject
 
+    track user: @user, utm_campaign: letter.uid, extra: {letter_id: @letter.id}
+
     mail to: email, subject: subject do |format|
       format.html { render inline: body }
     end

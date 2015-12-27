@@ -12,5 +12,9 @@ class LetterMailerTest < ActionMailer::TestCase
     assert_equal [user.email], email.to
     assert_equal "Hello #{user.email}", email.subject
     assert_equal "Hello #{user.email}, are you user ##{user.id}? Welcome from #{letter.id} letter", ActionView::Base.full_sanitizer.sanitize(email.body.to_s).strip
-    end
+
+    message = Ahoy::Message.last
+    assert_equal message.letter_id, letter.id
+    assert_equal message.user_id, user.id
+  end
 end
