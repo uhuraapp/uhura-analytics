@@ -1,6 +1,8 @@
 class LettersController < ApplicationController
   before_action :set_letter, only: [:show, :edit, :update, :destroy, :deliver]
 
+  before_action :authenticate_admin!
+
   def index
     @letters = Letter.all
   end
