@@ -18,6 +18,7 @@
 <% if @letter.done %>
   <%= form_for :letter, url: deliver_letter_path do |f| %>
     <%= f.text_field :email %>
+    Unique Send<%= f.check_box :unique_send %>
     All <%= check_box_tag :all %>
     <%= f.submit "Send" %>
   <% end %>

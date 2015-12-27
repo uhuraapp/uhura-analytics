@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151227040712) do
+ActiveRecord::Schema.define(version: 20151227112945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,9 +103,10 @@ ActiveRecord::Schema.define(version: 20151227040712) do
     t.string   "subject"
     t.text     "body"
     t.boolean  "done"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "uid"
+    t.boolean  "unique_send"
   end
 
   create_table "visits", id: :uuid, default: nil, force: :cascade do |t|

@@ -74,4 +74,16 @@ class LettersControllerTest < ActionController::TestCase
     assert_match /Hello /, letter_email.subject
     assert_match /Hello .+, are you user/, letter_email.body.to_s
   end
+
+  test "should deliver only if user never receive" do
+    all_users = users()
+    received = all_users.to_a.shuffle.take(2)
+    received.each do |u|
+       Ahoy::Message.create!(user_id: u.id, letter_id: @letter.id)
+    end
+
+    assert_difference 'ActionMailer::Base.deliveries.size', (all_users.size) - received.size do
+      post :deliver, id: @letter.id, all: true, letter: { unique_send: true }
+    end
+  end
 end

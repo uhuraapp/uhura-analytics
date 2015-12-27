@@ -21,7 +21,9 @@ class LettersController < ApplicationController
     users = params[:all] ? User.all : User.where(email: params[:letter][:email])
 
     users.each do |user|
+      unless Ahoy::Message.exists?(user_id: user.id, letter_id: @letter.id) and params[:letter][:unique_send]
         LetterMailer.prepare(@letter.id, user.email).deliver_later
+      end
     end
     render text: "OK"
   end

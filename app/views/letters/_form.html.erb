@@ -10,7 +10,10 @@
       </ul>
     </div>
   <% end %>
-
+  <div class="field">
+    <%= f.label :uid %><br>
+    <%= f.text_field :uid %>
+  </div>
   <div class="field">
     <%= f.label :subject %><br>
     <%= f.text_field :subject %>
@@ -19,6 +22,10 @@
     <%= f.label :body %><br>
     <%= f.hidden_field :body %>
     <trix-editor input='letter_body'></trix-editor>
+  </div>
+  <div class="field">
+    <%= f.label :unique_send %><br>
+    <%= f.check_box :unique_send %>
   </div>
   <div class="field">
     <%= f.label :done %><br>
