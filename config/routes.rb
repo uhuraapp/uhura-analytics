@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :users, only: [:show, :index]
   resources :letters do
     member do
       post :deliver
