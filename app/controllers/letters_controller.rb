@@ -24,7 +24,7 @@ class LettersController < ApplicationController
 
     users.each do |user|
       unless unique && Ahoy::Message.exists?(user_id: user.id, letter_id: @letter.id)
-        LetterMailer.prepare(@letter.id, user.email).deliver_later
+        LetterMailer.prepare(@letter.id, user.email, params[:all]).deliver_later
       end
     end
     render text: "OK"
