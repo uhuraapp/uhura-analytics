@@ -25,7 +25,7 @@ end
 
 gem 'ahoy_matey'
 gem 'ahoy_email'
-gem 'mailkick'
+gem 'mailkick', github: 'ankane/mailkick', branch: 'master'
 gem 'blazer'
 
 gem 'mailgun-ruby'
