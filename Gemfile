@@ -28,6 +28,8 @@ gem 'ahoy_email'
 gem 'mailkick'
 gem 'blazer'
 
+gem 'mailgun-ruby'
+
 gem 'rails_12factor', group: :production
 
 gem 'activeresource'
