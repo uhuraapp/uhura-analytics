@@ -17,4 +17,17 @@ class LetterMailerTest < ActionMailer::TestCase
     assert_equal message.letter_id, letter.id
     assert_equal message.user_id, user.id
   end
+
+  test "subscriptions" do
+    letter = letters(:one)
+    user = users(1)
+
+    email = LetterMailer.prepare(letter.id, user.email, false).deliver_now
+
+    assert_no_match /Don't want to receive emails from me\? Unsubscribe$/, ActionView::Base.full_sanitizer.sanitize(email.body.to_s).strip
+
+    email = LetterMailer.prepare(letter.id, user.email, true).deliver_now
+
+    assert_match /Don't want to receive emails from me\? Unsubscribe$/, ActionView::Base.full_sanitizer.sanitize(email.body.to_s).strip
+  end
 end
