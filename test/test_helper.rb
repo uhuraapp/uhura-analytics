@@ -41,3 +41,9 @@ ActiveResource::HttpMock.respond_to do |mock|
     mock.get "/v3/users.json?email=#{CGI::escape(user.email)}", headers, many(:users, [user.id])
   end
 end
+
+def with(klass, options)
+  object = klass.create(options)
+  yield klass if block_given?
+  object.delete
+end
