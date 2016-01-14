@@ -1,6 +1,8 @@
 class User < ActiveResource::Base
   cattr_accessor :static_headers
 
+  mailkick_user
+
   self.site = 'https://api.uhura.io/v3'
   self.static_headers = headers
 
