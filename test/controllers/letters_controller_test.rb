@@ -73,6 +73,7 @@ class LettersControllerTest < ActionController::TestCase
 
     assert_match /Hello /, letter_email.subject
     assert_match /Hello .+, are you user/, letter_email.body.to_s
+    assert_match /Don't want to receive emails from me\?/, letter_email.body.to_s
   end
 
   test "should deliver only if user never receive" do
