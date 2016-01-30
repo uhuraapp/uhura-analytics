@@ -2,7 +2,7 @@ class User < ActiveResource::Base
   cattr_accessor :static_headers
   include MailkickHelper
 
-  self.site = 'http://localhost:3000/v3'
+  self.site = 'https://api.uhura.io/v3'
   self.static_headers = headers
 
   schema do
